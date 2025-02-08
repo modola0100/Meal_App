@@ -1,130 +1,102 @@
 import 'package:flutter/material.dart';
 import 'package:meal/model/meals.dart';
 import 'package:meal/widgets/data.dart';
-class mealDetail extends StatelessWidget {
-  const mealDetail({super.key});
+
+
+class MealDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     String id =ModalRoute.of(context)!.settings.arguments as String;
     meal mealss=meals.firstWhere((value){
-return value.id==id;
+      return value.id==id;
     });
+
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        backgroundColor: Colors.amber,
-        title: Text(mealss.title),
+        title: Text(
+          mealss.title,
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
+        backgroundColor: Colors.orangeAccent,
       ),
-      body:
-         Column(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                        image: AssetImage(mealss.imageurl))
-                  ),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                mealss.imageurl,
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
-
-            Container(
-              width: double.infinity,
-              height:50 ,
-              child:
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                Column(
+            SizedBox(height: 16),
+            Text(
+              mealss.title,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Price: ${mealss.salary}",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                Row(
                   children: [
-                    Icon(Icons.favorite,color: Colors.amber,),
-                    Text("favorite",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
-
+                    Icon(Icons.star, color: Colors.orange, size: 24),
+                    Icon(Icons.star, color: Colors.orange, size: 24),
+                    Icon(Icons.star, color: Colors.orange, size: 24),
+                    Icon(Icons.star, color: Colors.orange, size: 24),
+                    Icon(Icons.star_half, color: Colors.orange, size: 24),
                   ],
-
                 ),
-                  Column(
-                    children: [
-                      Icon(Icons.edit,color: Colors.amber,),
-                      Text("edit",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),
-
-                    ],
-
-                  ),
-                  Column(
-                    children: [
-                      Icon(Icons.share,color: Colors.amber,),
-                      Text("share",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),
-
-                    ],
-
-                  )
-
-
-                ],
-              )
-              ,
+              ],
             ),
-            Container(
+            SizedBox(height: 12),
+            Text(
+              "Meal Description: This meal is very delicious and made with fresh and healthy ingredients, perfect for any time!",
+              style: TextStyle(fontSize: 16, height: 1.5),
+            ),
+            Spacer(),
+            SizedBox(
               width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.0),
-                border: Border.all(color: Colors.yellowAccent, width: 3.0),
-    ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text("Shawarma is a popular Middle Eastern dish made of thinly sliced marinated meat, usually beef, chicken, or lamb, stacked in a cone-like shape and slowly roasted on a vertical rotisserie. The meat is shaved off in thin slices and served in a warm pita or flatbread, often accompanied by fresh vegetables, garlic sauce, tahini, or hummus. Known for its rich flavors and juicy texture."),
-
-
-                    ],
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orangeAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  "Add to Cart",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
-
-
-
-
             ),
-
-
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("price",style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
-                          Text(mealss.salary,style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),)
-                        ],
-                      ),
-                    ),
-                  ),
-                  
-
-
-
-
-              
-
-
-
-
-
           ],
         ),
-
-
+      ),
     );
   }
 }

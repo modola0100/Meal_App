@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       routes: {
         "s2":(context)=>MealScreen(),
-        "s3":(context)=>mealDetail(),
+        "s3":(context)=>MealDetailScreen(),
       },
       home: HomeScreen(),
     );
